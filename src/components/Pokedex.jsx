@@ -1,6 +1,5 @@
 import { useState, Component, useEffect } from "react";
-import Card from "./cards/Card";
-import { get } from "axios";
+import Card from "./Card";
 
 const Pokedex = () => {
 
