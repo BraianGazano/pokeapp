@@ -6,7 +6,7 @@ const Pokedex = () => {
     const [result, setResult] = useState([]);
     const [poke, setPoke] = useState([]);
     const [load, setLoad] = useState('true');
-    const arr = [];
+    const pokemones = [];
     
     useEffect(() => {
       fetch('https://pokeapi.co/api/v2/pokemon/?limit=50')
@@ -15,8 +15,8 @@ const Pokedex = () => {
       data.results.map((item) => {
       fetch(item.url)
       .then((response) => response.json())
-      .then((allpokemon) => arr.push(allpokemon));
-      setPoke(arr);}),));}, []);
+      .then((allpokemon) => pokemones.push(allpokemon));
+      setPoke(pokemones);}),));}, []);
 
     setTimeout(() => {
     setLoad(false);
