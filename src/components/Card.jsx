@@ -1,12 +1,13 @@
 import CardStyled from "./styles/CardStyled";
+import Subtitle from "./Subtitle";
 
 const Card = ({types, name, sprites}) => {
     return ( 
             <CardStyled>
                 <img  src={sprites.front_default} alt='pokemon' />
                 <div>
-                    <h5 >{name}</h5>
-                    <h6>Tipo: {types[0].type.name}</h6>
+                    <Subtitle title={name}></Subtitle>
+                    <Subtitle title={'Tipo: '+ types[0].type.name}></Subtitle>
                 </div>
             </CardStyled>
      );
