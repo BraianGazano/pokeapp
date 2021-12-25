@@ -1,5 +1,6 @@
 import { useState, Component, useEffect } from "react";
 import Card from "./Card";
+import PokedexStyled from "./styles/PokedexStyled";
 
 const Pokedex = () => {
 
@@ -22,8 +23,7 @@ const Pokedex = () => {
     setLoad(false);
     }, 1000);
     return (
-        <div className="App">
-            <div className='pokegallery'>
+        <PokedexStyled>
             { load ? (
             <p>Loading...</p>
             ) : (
@@ -33,10 +33,9 @@ const Pokedex = () => {
             </div>
             ))
             )}
-            </div>
-        </div>
+        </PokedexStyled>
     );
-    }
+}
 
  
 export default Pokedex;

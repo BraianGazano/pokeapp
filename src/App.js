@@ -1,4 +1,3 @@
-
 import Header from './components/Header';
 import Pokedex from './components/Pokedex';
 import AppStyled from './components/styles/AppStyled';

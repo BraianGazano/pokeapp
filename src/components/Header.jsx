@@ -1,6 +1,8 @@
+import Title from "./Title";
+
 const Header = () => {
     return (
-        <h1>Bienvenido a la Pokedex</h1>
+        <Title title={'Bienvenido a la Pokedex'}></Title>
      );
 }
  
