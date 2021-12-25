@@ -1,21 +1,21 @@
-import { useState, Component, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "./Card";
 import PokedexStyled from "./styles/PokedexStyled";
 import {get} from 'axios';
 const Pokedex = () => {
 
-    const [result, setResult] = useState([]);
+
     const [poke, setPoke] = useState([]);
     const [load, setLoad] = useState('true');
     const pokemones = [];
     
     useEffect(() => {
-      get('https://pokeapi.co/api/v2/pokemon/?limit=50', {responseType:'json'})
-      .then(({data})=>{setResult(data.results.map((item)=>{
-          get(item.url,{responseType:'json'})
+      get('https://pokeapi.co/api/v2/pokemon/?limit=50')
+      .then(({data})=>{data.results.map((item)=>{
+          get(item.url)
           .then((allPokemon) => pokemones.push(allPokemon));
         setPoke(pokemones)
-      }),)})
+      })})
     },[]);
 
     setTimeout(() => {setLoad(false)}, 1000);
