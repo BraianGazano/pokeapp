@@ -4,31 +4,38 @@ import PokedexStyled from "./styles/PokedexStyled";
 import {get} from 'axios';
 const Pokedex = () => {
 
-
+    const [search, setSearch] = useState({value:'',show:''});
     const [poke, setPoke] = useState([]);
     const [load, setLoad] = useState('true');
     const pokemones = [];
     
-    useEffect(() => {
-      get('https://pokeapi.co/api/v2/pokemon/?limit=50')
-      .then(({data})=>{data.results.map((item)=>{
-          get(item.url)
-          .then((allPokemon) => pokemones.push(allPokemon));
-        setPoke(pokemones)
-      })})
-    },[]);
+    useEffect(() => {  
+        search.value && get(`https://pokeapi.co/api/v2/pokemon/${search.value}`)
+        .then(({data})=>{
+            pokemones.push(data.name, data.sprites, data.types);
+            setPoke(pokemones);
+        })
+    },[search.value]);
 
-    setTimeout(() => {setLoad(false)}, 1000);
+    const handleChange = (e) => {
+        setSearch({show: e.target.value})
+    }
+    const submit = (e) => {
+        let busqueda = search.show.toLowerCase();
+        setSearch({value: busqueda})
+        e.preventDefault();
+        setTimeout(() => {setLoad(false)}, 1000);
+    }
     return (
         <PokedexStyled>
-            { load ? (
+            <form onSubmit={(e) =>submit(e)}>
+                <input type="text" onChange={(e)=>handleChange(e)} />
+                <input type="submit" />
+            </form>
+            {load && search.show? (
             <p>Loading...</p>
             ) : (
-            poke.map((img, i) => (
-            <div id={img.data.id} key={img.data.id}>
-                <Card sprites={img.data.sprites} types={img.data.types} name={img.data.name}></Card>
-            </div>
-            ))
+            poke[0] && <Card sprites={poke[1]} types={poke[2]} name={poke[0]}></Card>
             )}
         </PokedexStyled>
     );
